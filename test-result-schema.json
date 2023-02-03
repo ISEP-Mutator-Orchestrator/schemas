@@ -1,0 +1,74 @@
+{
+  "MutantResult": {
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "location": {
+        "$ref": "#/definitions/Location",
+        "items": {
+          "$ref": "#/definitions/Location"
+        },
+        "type": "array"
+      },
+      "mutatorName": {
+        "type": "string"
+      },
+      "status": {
+        "enum": ["Killed", "Survived", "NoCoverage", "CompileError", "RuntimeError", "Timeout", "Ignored"],
+        "type": "string"
+      },
+      "coveredBy": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "description": {
+        "type": "string"
+      },
+      "duration": {
+        "type": "number"
+      },
+      "killedBy": {},
+      "replacement": {
+        "type": "string"
+      },
+      "static": {
+        "type": "boolean"
+      },
+      "statusReason": {
+        "type": "string"
+      },
+      "testsCompleted": {
+        "type": "number"
+      }
+    },
+    "type": "object",
+    "required": ["id", "location", "mutatorName"]
+  },
+  "Location": {
+    "properties": {
+      "end": {
+        "$ref": "#/definitions/Position"
+      },
+      "start": {
+        "$ref": "#/definitions/Position"
+      }
+    },
+    "type": "object",
+    "required": ["end", "start"]
+  },
+  "Position": {
+    "properties": {
+      "column": {
+        "type": "integer"
+      },
+      "line": {
+        "type": "integer"
+      }
+    },
+    "type": "object",
+    "required": ["column", "line"]
+  }
+}

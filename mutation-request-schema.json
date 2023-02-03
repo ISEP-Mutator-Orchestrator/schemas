@@ -1,0 +1,190 @@
+{
+  "SubmitMutationsDto": {
+    "properties": {
+      "files": {
+        "description": "A (key, File) object. `default`is an example key",
+        "properties": {
+          "default": {
+            "$ref": "#/definitions/File"
+          }
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/File"
+        }
+      },
+      "testFiles": {
+        "description": "A (key, TestFile) object. `default`is an example key",
+        "properties": {
+          "default": {
+            "$ref": "#/definitions/TestFile"
+          }
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/TestFile"
+        }
+      },
+      "frameworkInformation": {
+        "not": {
+          "type": "null"
+        },
+        "$ref": "#/definitions/FrameworkInformation"
+      }
+    },
+    "type": "object",
+    "required": ["files", "testFiles", "frameworkInformation"]
+  },
+  "FrameworkInformation": {
+    "properties": {
+      "branding": {
+        "$ref": "#/definitions/BrandingInformation"
+      },
+      "dependencies": {
+        "$ref": "#/definitions/Dependencies"
+      },
+      "name": {
+        "type": "string"
+      },
+      "version": {
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": ["name", "version"]
+  },
+  "BrandingInformation": {
+    "properties": {
+      "homepageUrl": {
+        "type": "string"
+      },
+      "imageUrl": {
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": ["homepageUrl", "imageUrl"]
+  },
+  "File": {
+    "properties": {
+      "language": {
+        "type": "string"
+      },
+      "mutants": {
+        "items": {
+          "type": "#/definitions/Mutant"
+        },
+        "type": "array"
+      },
+      "source": {
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": ["language", "mutants"]
+  },
+  "TestFile": {
+    "properties": {
+      "source": {
+        "type": "string"
+      },
+      "tests": {
+        "items": {
+          "type": "#/definitions/TestDefinition"
+        },
+        "type": "array"
+      }
+    },
+    "type": "object",
+    "required": ["tests"]
+  },
+  "Dependencies": {
+    "type": "string",
+    "title": "string",
+    "description": "string",
+    "additionalProperties": {
+      "type": "string"
+    }
+  },
+  "Mutant": {
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "location": {
+        "$ref": "#/definitions/Location",
+        "items": {
+          "$ref": "#/definitions/Location"
+        },
+        "type": "array"
+      },
+      "mutatorName": {
+        "type": "string"
+      },
+      "coveredBy": {},
+      "description": {
+        "type": "string"
+      },
+      "replacement": {
+        "type": "string"
+      },
+      "static": {
+        "type": "boolean"
+      }
+    },
+    "type": "object",
+    "required": ["id", "location", "mutatorName"]
+  },
+  "Location": {
+    "properties": {
+      "end": {
+        "$ref": "#/definitions/Position"
+      },
+      "start": {
+        "$ref": "#/definitions/Position"
+      }
+    },
+    "type": "object",
+    "required": ["end", "start"]
+  },
+  "Position": {
+    "properties": {
+      "column": {
+        "type": "integer"
+      },
+      "line": {
+        "type": "integer"
+      }
+    },
+    "type": "object",
+    "required": ["column", "line"]
+  },
+  "TestDefinition": {
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "location": {
+        "$ref": "#/definitions/OpenEndLocation"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "type": "object",
+    "required": ["id", "name"]
+  },
+  "OpenEndLocation": {
+    "properties": {
+      "end": {
+        "$ref": "#/definitions/Position"
+      },
+      "start": {
+        "not": {
+          "type": "null"
+        },
+        "$ref": "#/definitions/Position"
+      }
+    },
+    "type": "object",
+    "required": ["start"]
+  }
+}
